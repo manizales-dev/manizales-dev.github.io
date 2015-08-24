@@ -333,7 +333,7 @@
             var $successAlert = $(".join-us-success");
             var $errorAlert = $(".join-us-error");
             var email = $form.find("input[name='email']").val();
-            $.post('http://localhost:3000/invite', {email: email}, function(response){
+            $.post('http://manizales-dev.herokuapp.com/invite', {email: email}, function(response){
                 if (response.ok) {
                     $errorAlert.hide();
                     $successAlert.show();
