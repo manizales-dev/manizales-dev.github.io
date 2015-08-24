@@ -74,7 +74,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Creémos que compartir es bueno.</h2>
+                    <h2>Creemos que compartir es bueno.</h2>
                     <p class="lead">Por esto te invitamos a que hagas parte de la comunidad más grande de Manizales en desarrollo.</a>.</p>
                 </div>
             </div>
@@ -144,6 +144,39 @@
                     <!-- /.row (nested) -->
                 </div>
                 <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+    <section id="join-us" class="join-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>¡Únete!</h2>
+                    <p class="lead">Inscríbite con tu correo para enviarte una invitación para que hagas parte de la comunidad de Manizales Dev en Slack</p>
+                    <div class="col-lg-6 col-lg-offset-3">
+                        <div class="alert alert-danger join-us-error alert-dismissable" role="alert" style="display: none">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <span class="join-us-error-msg">Error!</span>
+                        </div>
+                        <div class="alert alert-success join-us-success alert-dismissable" role="alert"  style="display: none">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            ¡Listo! Te hemos enviado una invitación, revisa tu correo.
+                        </div>
+                        <form id="join-us-form">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <input type="email" class="form-control input-lg" placeholder="Email" name="email">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-lg btn-block btn-primary">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <!-- /.row -->
         </div>
@@ -294,6 +327,23 @@
                 }
             }
         });
+        $('#join-us-form').submit(function(event){
+            event.preventDefault();
+            var $form = $(this);
+            var $successAlert = $(".join-us-success");
+            var $errorAlert = $(".join-us-error");
+            var email = $form.find("input[name='email']").val();
+            $.post('http://localhost:3000/invite', {email: email}, function(response){
+                if (response.ok) {
+                    $errorAlert.hide();
+                    $successAlert.show();
+                    $successAlert.show();
+                } else {
+                    $errorAlert.show();
+                    $errorAlert.find("span[class='join-us-error-msg']").html(response.error);
+                }
+            }, 'json')
+        })
     });
     </script>
 
