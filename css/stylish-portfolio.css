@@ -253,3 +253,9 @@ hr.small {
 footer {
     padding: 100px 0;
 }
+
+/* hgroup header */
+hgroup{
+    color: white;
+    text-shadow: 0 0 10px #323232;
+}
